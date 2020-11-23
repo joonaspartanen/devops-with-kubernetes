@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: partanenjoonas/todo-app:1.0
+          image: partanenjoonas/todo-app:0.3
