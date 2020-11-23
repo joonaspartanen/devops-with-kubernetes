@@ -10,3 +10,7 @@ spec:
         backend:
           serviceName: main-app-svc
           servicePort: 2345
+      - path: /pingpong
+        backend:
+          serviceName: pingpong-app-svc
+          servicePort: 2346
