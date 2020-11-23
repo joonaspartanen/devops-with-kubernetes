@@ -113,6 +113,7 @@ $ kubectl apply -f manifests/service.yaml
 service/todo-app-svc created
 
 $ curl http://localhost:8002
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -124,4 +125,32 @@ $ curl http://localhost:8002
     <h1>Yet Another Todo App</h1>
   </body>
 </html>
+```
+
+### 1.07
+
+```zsh
+$ kubectl apply -f manifests/deployment.yaml
+deployment.apps/main-app-dep created
+
+$ kubectl apply -f manifests/service.yaml
+service/main-app-svc configured
+
+$ kubectl apply -f manifests/ingress.yaml
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+ingress.extensions/main-app-ingress configured
+
+$ kubectl get svc
+NAME           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+todo-app-svc   NodePort    10.43.221.115   <none>        1234:30080/TCP   32m
+kubernetes     ClusterIP   10.43.0.1       <none>        443/TCP          13m
+main-app-svc   ClusterIP   10.43.207.77    <none>        2345/TCP         7m3s
+
+$ kubectl get ing
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+NAME               CLASS    HOSTS   ADDRESS      PORTS   AGE
+main-app-ingress   <none>   *       172.20.0.2   80      7m
+
+$ curl http://localhost:8001
+1:08:02 PM: 5d0df386-3420-4b58-b3e5-ee1b352cc67d%
 ```
