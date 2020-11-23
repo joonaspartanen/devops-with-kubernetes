@@ -154,3 +154,27 @@ main-app-ingress   <none>   *       172.20.0.2   80      7m
 $ curl http://localhost:8001
 1:08:02 PM: 5d0df386-3420-4b58-b3e5-ee1b352cc67d%
 ```
+
+### 1.08
+
+```zsh
+$ kubectl apply -f manifests/service.yaml
+service/todo-app-svc configured
+
+$ kubectl apply -f manifests/ingress.yaml
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+ingress.extensions/todo-app-ingress created
+
+$ curl http://localhost:8001
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yet Another Todo App</title>
+  </head>
+  <body>
+    <h1>Yet Another Todo App</h1>
+  </body>
+</html>
+```
