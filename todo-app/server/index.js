@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const axios = require('axios')
 const fs = require('fs')
 const app = express()
@@ -8,6 +9,11 @@ const directory = path.join('/', 'usr', 'src', 'app', 'images')
 const filePath = path.join(directory, 'pic.jpg')
 
 let lastPhotoUpdate = new Date()
+
+const todos = [
+  { content: 'Clean the house', done: false },
+  { content: 'Wash the dishes', done: true },
+]
 
 const fetchPhotoFromApi = async () => {
   const response = await axios.get('https://picsum.photos/800', { responseType: 'stream' })
@@ -20,6 +26,7 @@ const fetchPhotoFromApi = async () => {
 }
 
 app.use('/todoapp/img', express.static(path.join(__dirname, 'images')))
+app.use(bodyParser.json())
 
 fetchPhotoFromApi()
 
@@ -28,11 +35,14 @@ app.get('/todoapp/api/todos', (req, res) => {
     fetchPhotoFromApi()
   }
 
-  const todos = [
-    { content: 'Clean the house', done: false },
-    { content: 'Wash the dishes', done: true },
-  ]
   res.json(todos)
+})
+
+app.post('/todoapp/api/todos', (req, res) => {
+  console.log(req.body)
+  const todo = { content: req.body.content, done: false }
+  todos.push(todo)
+  res.json(todo)
 })
 
 app.listen(PORT, () => {
