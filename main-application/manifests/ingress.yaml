@@ -12,5 +12,9 @@ spec:
           servicePort: 2345
       - path: /todoapp
         backend:
-          serviceName: todo-app-svc
+          serviceName: todo-app-client-svc
           servicePort: 2347
+      - path: /todoapp/api
+        backend:
+          serviceName: todo-app-svc
+          servicePort: 2348

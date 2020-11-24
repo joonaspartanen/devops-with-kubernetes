@@ -19,7 +19,7 @@
 
 <script>
   const fetchTodos = () => {
-    fetch('/todoapp/todos')
+    fetch('/todoapp/api/todos')
       .then(response => response.json())
       .then(data => {
         const list = document.getElementById('todo-list')

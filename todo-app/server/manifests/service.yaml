@@ -7,6 +7,6 @@ spec:
   selector:
     app: todo-app
   ports:
-    - port: 2347
+    - port: 2348
       protocol: TCP
-      targetPort: 8000
+      targetPort: 8050

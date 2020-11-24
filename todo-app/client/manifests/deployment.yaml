@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-client-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app-client
+  template:
+    metadata:
+      labels:
+        app: todo-app-client
+    spec:
+      volumes:
+        - name: images-volume
+          persistentVolumeClaim:
+              claimName: images-claim
+      containers:
+        - name: todo-app-client
+          image: partanenjoonas/todo-app-client:1.0.7
+          volumeMounts:
+            - mountPath: /usr/src/app/images
+              name: images-volume
