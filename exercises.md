@@ -199,3 +199,19 @@ pong 1
 $ curl http://localhost:8001/
 7:12:31 AM: 69161c61-0cfd-4b75-926d-111cf9a0bc07
 ```
+
+### 1.11
+
+```zsh
+$ kubectl apply -f manifests/persistentvolume.yaml
+persistentvolume/example-pv created
+
+$ kubectl apply -f manifests/persistentvolumeclaim.yaml
+persistentvolumeclaim/hash-claim created
+
+$ kubectl apply -f manifests/deployment.yaml
+deployment.apps/main-apps-dep configured
+
+$ curl http://localhost:8001/
+<p>8:27:03 AM: 82f1da4c-6eb2-45fe-8c60-c7bb90a20d59</p><p>Ping / Pongs: 0</p>
+```
