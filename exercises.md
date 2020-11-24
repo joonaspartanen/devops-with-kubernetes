@@ -178,3 +178,24 @@ $ curl http://localhost:8001
   </body>
 </html>
 ```
+
+### 1.09
+
+```zsh
+$ kubectl apply -f manifests/service.yaml
+service/main-app-svc configured
+
+$ kubectl apply -f manifests/ingress.yaml
+Warning: extensions/v1beta1 Ingress is deprecated in v1.14+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+ingress.extensions/main-app-ingress created
+
+$ curl http://localhost:8001/pingpong
+pong 1
+```
+
+### 1.10
+
+```zsh
+$ curl http://localhost:8001/
+7:12:31 AM: 69161c61-0cfd-4b75-926d-111cf9a0bc07
+```

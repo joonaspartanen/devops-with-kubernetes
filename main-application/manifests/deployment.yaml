@@ -1,17 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: main-app-dep
+  name: main-apps-dep
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: main-app
+      app: main-apps
   template:
     metadata:
       labels:
-        app: main-app
+        app: main-apps
     spec:
+      volumes: 
+        - name: hash-volume
+          emptyDir: {}
       containers:
-        - name: main-app
-          image: partanenjoonas/main-app:1.07
+        - name: main-app-writer
+          image: partanenjoonas/main-app-writer:1.10.3
+          volumeMounts:
+            - mountPath: /usr/src/app/files
+              name: hash-volume
+        - name: main-app-reader
+          image: partanenjoonas/main-app-reader:1.10.4
+          volumeMounts:
+            - mountPath: /usr/src/app/files
+              name: hash-volume
