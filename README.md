@@ -275,9 +275,13 @@ $ curl http://localhost:8001/todoapp
 </script>
 ```
 
-### 1.13
+### 2.01
 
 ```zsh
 $ curl http://localhost:8001/
 <p>12:06:13 PM: 474aad8a-f988-4b30-9cb7-3e9b229887c7</p><p>Ping / pongs: 18</p>
 ```
+
+### 2.02
+
+See [todo-app](https://github.com/joonaspartanen/devops-with-kubernetes/tree/f3362444d6f301da3cb9c63339639590acb8e01f/todo-app).
