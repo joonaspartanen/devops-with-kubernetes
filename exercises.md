@@ -215,3 +215,21 @@ deployment.apps/main-apps-dep configured
 $ curl http://localhost:8001/
 <p>8:27:03 AM: 82f1da4c-6eb2-45fe-8c60-c7bb90a20d59</p><p>Ping / Pongs: 0</p>
 ```
+
+### 1.12
+
+```zsh
+$ curl http://localhost:8001/todoapp
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yet Another Todo App</title>
+  </head>
+  <body>
+    <h1>Yet Another Todo App</h1>
+    <img src="todoapp/img/pic.jpg">
+  </body>
+</html>
+```
