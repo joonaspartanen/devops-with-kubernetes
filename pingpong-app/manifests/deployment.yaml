@@ -18,7 +18,7 @@ spec:
               claimName: hash-claim
       containers:
         - name: pingpong-app
-          image: partanenjoonas/pingpong-app:1.11.2
+          image: partanenjoonas/pingpong-app:2.01.2
           volumeMounts:
             - mountPath: /usr/src/app/files
               name: hash-volume

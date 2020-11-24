@@ -1,11 +1,12 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 8080
 const fs = require('fs')
 const path = require('path')
 const directory = path.join('/', 'usr', 'src', 'app', 'files')
 const filePath = path.join(directory, 'pingpong.txt')
 
+// DEPRECATED
 const saveToFile = () => {
   const data = `Ping / Pongs: ${counter}`
   fs.writeFile(filePath, data, function (err) {
@@ -17,12 +18,11 @@ const saveToFile = () => {
 }
 
 let counter = 0
-saveToFile()
+//saveToFile()
 
-app.get('/pingpong', (req, res) => {
+app.get('/', (req, res) => {
   counter++
-  saveToFile()
-  res.send(`pong ${counter}`)
+  res.json({ counter })
 })
 
 app.listen(PORT, () => {

@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const axios = require('axios')
 const PORT = process.env.PORT || 8000
 const fs = require('fs')
 const path = require('path')
@@ -7,12 +8,12 @@ const directory = path.join('/', 'usr', 'src', 'app', 'files')
 const hashPath = path.join(directory, 'hashes.txt')
 const pingPongPath = path.join(directory, 'pingpong.txt')
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   const hash = readHash()
-  const pingPongs = readPingPongs()
+  const pingPongs = await getPingPongs()
   console.log(hash)
   console.log(pingPongs)
-  res.send(`<p>${hash}</p><p>${pingPongs}</p>`)
+  res.send(`<p>${hash}</p><p>Ping / pongs: ${pingPongs.counter}</p>`)
 })
 
 app.listen(PORT, () => {
@@ -28,6 +29,7 @@ const readHash = () => {
   }
 }
 
+// DEPRECATED
 const readPingPongs = () => {
   try {
     return fs.readFileSync(pingPongPath, 'utf8')
@@ -35,4 +37,9 @@ const readPingPongs = () => {
     console.log(err)
     return ''
   }
+}
+
+const getPingPongs = async () => {
+  const response = await axios.get('http://pingpong-app-svc')
+  return response.data
 }

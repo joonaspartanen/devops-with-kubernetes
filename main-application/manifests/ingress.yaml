@@ -10,10 +10,6 @@ spec:
         backend:
           serviceName: main-apps-svc
           servicePort: 2345
-      - path: /pingpong
-        backend:
-          serviceName: pingpong-app-svc
-          servicePort: 2346
       - path: /todoapp
         backend:
           serviceName: todo-app-svc

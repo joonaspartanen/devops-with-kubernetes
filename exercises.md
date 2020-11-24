@@ -274,3 +274,10 @@ $ curl http://localhost:8001/todoapp
   document.addEventListener("DOMContentLoaded", fetchTodos);
 </script>
 ```
+
+### 1.13
+
+```zsh
+$ curl http://localhost:8001/
+<p>12:06:13 PM: 474aad8a-f988-4b30-9cb7-3e9b229887c7</p><p>Ping / pongs: 18</p>
+```
