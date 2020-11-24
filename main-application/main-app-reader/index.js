@@ -4,19 +4,35 @@ const PORT = process.env.PORT || 8000
 const fs = require('fs')
 const path = require('path')
 const directory = path.join('/', 'usr', 'src', 'app', 'files')
-const filePath = path.join(directory, 'hashes.txt')
+const hashPath = path.join(directory, 'hashes.txt')
+const pingPongPath = path.join(directory, 'pingpong.txt')
 
-app.get('/', async (req, res) => {
-  const hash = await readHash()
+app.get('/', (req, res) => {
+  const hash = readHash()
+  const pingPongs = readPingPongs()
   console.log(hash)
-  res.send(hash)
+  console.log(pingPongs)
+  res.send(`<p>${hash}</p><p>${pingPongs}</p>`)
 })
 
 app.listen(PORT, () => {
   console.log(`Server started in port ${PORT}`)
 })
 
-const readHash = async () => {
-  const hash = fs.readFileSync(filePath, 'utf8')
-  return hash
+const readHash = () => {
+  try {
+    return fs.readFileSync(hashPath, 'utf8')
+  } catch (err) {
+    console.log(err)
+    return ''
+  }
+}
+
+const readPingPongs = () => {
+  try {
+    return fs.readFileSync(pingPongPath, 'utf8')
+  } catch (err) {
+    console.log(err)
+    return ''
+  }
 }

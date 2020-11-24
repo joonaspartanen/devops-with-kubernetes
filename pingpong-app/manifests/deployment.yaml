@@ -12,6 +12,13 @@ spec:
       labels:
         app: pingpong-app
     spec:
+      volumes:
+        - name: hash-volume
+          persistentVolumeClaim:
+              claimName: hash-claim
       containers:
         - name: pingpong-app
-          image: partanenjoonas/pingpong-app:1.09
+          image: partanenjoonas/pingpong-app:1.11.2
+          volumeMounts:
+            - mountPath: /usr/src/app/files
+              name: hash-volume

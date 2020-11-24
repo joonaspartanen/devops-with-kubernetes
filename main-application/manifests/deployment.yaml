@@ -12,9 +12,10 @@ spec:
       labels:
         app: main-apps
     spec:
-      volumes: 
+      volumes:
         - name: hash-volume
-          emptyDir: {}
+          persistentVolumeClaim:
+              claimName: hash-claim
       containers:
         - name: main-app-writer
           image: partanenjoonas/main-app-writer:1.10.3
@@ -22,7 +23,7 @@ spec:
             - mountPath: /usr/src/app/files
               name: hash-volume
         - name: main-app-reader
-          image: partanenjoonas/main-app-reader:1.10.4
+          image: partanenjoonas/main-app-reader:1.11.1
           volumeMounts:
             - mountPath: /usr/src/app/files
               name: hash-volume
