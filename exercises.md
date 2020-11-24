@@ -233,3 +233,44 @@ $ curl http://localhost:8001/todoapp
   </body>
 </html>
 ```
+
+### 1.13
+
+```zsh
+$ curl http://localhost:8001/todoapp
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yet Another Todo App</title>
+  </head>
+  <body>
+    <h1>Yet Another Todo App</h1>
+    <img src="todoapp/img/pic.jpg" width="400px" height="400px" />
+    <form>
+      <input type="text" name="todo" />
+      <input type="submit" value="Add todo" />
+    </form>
+    <ul id="todo-list">
+    </ul>
+  </body>
+</html>
+
+<script>
+  const fetchTodos = () => {
+    fetch('/todoapp/todos')
+      .then(response => response.json())
+      .then(data => {
+        const list = document.getElementById('todo-list')
+        data.forEach(todo => {
+          const listItem = document.createElement('li')
+          listItem.appendChild(document.createTextNode(todo.content))
+          list.appendChild(listItem)
+        });
+      })
+  }
+
+  document.addEventListener("DOMContentLoaded", fetchTodos);
+</script>
+```

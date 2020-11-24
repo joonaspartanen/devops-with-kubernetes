@@ -11,7 +11,11 @@ let lastPhotoUpdate = new Date()
 
 const fetchPhotoFromApi = async () => {
   const response = await axios.get('https://picsum.photos/800', { responseType: 'stream' })
-  response.data.pipe(fs.createWriteStream(filePath))
+  try {
+    //response.data.pipe(fs.createWriteStream(filePath))
+  } catch (err) {
+    console.log(err)
+  }
   lastPhotoUpdate = new Date()
 }
 
@@ -27,6 +31,14 @@ app.get('/todoapp', (req, res) => {
 
   lastPhotoUpdate.requests++
   res.sendFile(path.join(__dirname + '/templates/index.html'))
+})
+
+app.get('/todoapp/todos', (req, res) => {
+  const todos = [
+    { content: 'Clean the house', done: false },
+    { content: 'Wash the dishes', done: true },
+  ]
+  res.json(todos)
 })
 
 app.listen(PORT, () => {
