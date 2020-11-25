@@ -3,9 +3,8 @@ kind: PersistentVolume
 metadata:
   name: example-pv
 spec:
-  storageClassName: manual
   capacity:
-    storage: 2Gi
+    storage: 3Gi
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
