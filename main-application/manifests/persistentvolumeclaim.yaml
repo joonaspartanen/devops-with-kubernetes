@@ -4,6 +4,7 @@ metadata:
   name: hash-claim
   namespace: main-namespace
 spec:
+  storageClassName: ""
   accessModes:
     - ReadWriteOnce
   resources:
