@@ -24,7 +24,13 @@ spec:
             - mountPath: /usr/src/app/files
               name: hash-volume
         - name: main-app-reader
-          image: partanenjoonas/main-app-reader:2.01.8
+          image: partanenjoonas/main-app-reader:2.06
+          env:
+            - name: MESSAGE
+              valueFrom:
+                  configMapKeyRef:
+                    name: dotenv-configmap
+                    key: message
           volumeMounts:
             - mountPath: /usr/src/app/files
               name: hash-volume

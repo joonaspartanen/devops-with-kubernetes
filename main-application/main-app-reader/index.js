@@ -13,7 +13,7 @@ app.get('/', async (req, res) => {
   const pingPongs = await getPingPongs()
   console.log(hash)
   console.log(pingPongs)
-  res.send(`<p>${hash}</p><p>Ping / pongs: ${pingPongs.counter}</p>`)
+  res.send(`<p>${process.env.MESSAGE}</p><p>${hash}</p><p>Ping / pongs: ${pingPongs.counter}</p>`)
 })
 
 app.listen(PORT, () => {

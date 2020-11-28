@@ -285,3 +285,16 @@ $ curl http://localhost:8001/
 ### 2.02
 
 See [todo-app](https://github.com/joonaspartanen/devops-with-kubernetes/tree/f3362444d6f301da3cb9c63339639590acb8e01f/todo-app).
+
+### 2.06
+
+```zsh
+$ kubectl apply -f manifests/deployment.yaml
+deployment.apps/main-apps-dep configured
+
+$ kubectl apply -f manifests/configmap.yaml
+configmap/dotenv-configmap configured
+
+$ curl http://localhost:8001/
+<p>hello</p><p>4:12:13 PM: 980815ff-fe99-46b3-8ee2-f11062b69ae2</p><p>Ping / pongs: 3</p>
+```
