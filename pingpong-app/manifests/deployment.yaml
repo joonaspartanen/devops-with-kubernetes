@@ -19,7 +19,17 @@ spec:
               claimName: hash-claim
       containers:
         - name: pingpong-app
-          image: partanenjoonas/pingpong-app:2.01.2
+          image: partanenjoonas/pingpong-app:2.07.11
           volumeMounts:
             - mountPath: /usr/src/app/files
               name: hash-volume
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-pw
+                  key: POSTGRES_PASSWORD
+          envFrom:
+          - configMapRef:
+              name: postgres-configuration
+

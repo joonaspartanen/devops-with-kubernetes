@@ -286,6 +286,10 @@ $ curl http://localhost:8001/
 
 See [todo-app](https://github.com/joonaspartanen/devops-with-kubernetes/tree/f3362444d6f301da3cb9c63339639590acb8e01f/todo-app).
 
+### 2.03-2.05
+
+See commit history.
+
 ### 2.06
 
 ```zsh
@@ -297,4 +301,23 @@ configmap/dotenv-configmap configured
 
 $ curl http://localhost:8001/
 <p>hello</p><p>4:12:13 PM: 980815ff-fe99-46b3-8ee2-f11062b69ae2</p><p>Ping / pongs: 3</p>
+```
+
+### 2.07
+
+```zsh
+$ curl http://localhost:8001/
+<p>hello</p><p>8:45:32 PM: 9f3e07de-5020-4922-adad-12a4cb936fb1</p><p>Ping / pongs: 22</p>
+
+$ kubectl get pods -n main-namespace
+NAME                                READY   STATUS                       RESTARTS   AGE
+postgres-ss-0                       1/1     Running                      2          3d4h
+main-apps-dep-75ff8cc588-gdj89      2/2     Running                      6          4d4h
+pingpong-app-dep-6f86dc8c6d-tk6zt   1/1     Running                      0          12m
+
+$ kubectl delete pod pingpong-app-dep-6f86dc8c6d-tk6zt -n main-namespace
+pod "pingpong-app-dep-6f86dc8c6d-tk6zt" deleted
+
+$ curl http://localhost:8001/
+<p>hello</p><p>8:46:38 PM: 366b4b3a-8085-4635-be97-a34c93e3119a</p><p>Ping / pongs: 23</p>
 ```
