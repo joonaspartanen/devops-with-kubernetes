@@ -1,16 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: main-app-ingress
+  name: todo-app-ingress
   namespace: todo-namespace
 spec:
   rules:
   - http:
       paths:
-      - path: /
-        backend:
-          serviceName: main-apps-svc
-          servicePort: 2345
       - path: /todoapp
         backend:
           serviceName: todo-app-client-svc

@@ -19,7 +19,16 @@ spec:
               claimName: images-claim
       containers:
         - name: todo-app
-          image: partanenjoonas/todo-app:1.0.6
+          image: partanenjoonas/todo-app:2.08.2
           volumeMounts:
             - mountPath: /usr/src/app/images
               name: images-volume
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tododb-password
+                  key: POSTGRES_PASSWORD
+          envFrom:
+          - configMapRef:
+              name: tododb-configuration

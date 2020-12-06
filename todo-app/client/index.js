@@ -7,6 +7,7 @@ const path = require('path')
 app.use('/todoapp/img', express.static(path.join(__dirname, 'images')))
 
 app.get('/todoapp', (req, res) => {
+  console.log('sending index.html')
   res.sendFile(path.join(__dirname + '/templates/index.html'))
 })
 
