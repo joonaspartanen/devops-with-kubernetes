@@ -321,3 +321,7 @@ pod "pingpong-app-dep-6f86dc8c6d-tk6zt" deleted
 $ curl http://localhost:8001/
 <p>hello</p><p>8:46:38 PM: 366b4b3a-8085-4635-be97-a34c93e3119a</p><p>Ping / pongs: 23</p>
 ```
+
+### 2.08
+
+See [todo-app](https://github.com/joonaspartanen/devops-with-kubernetes/tree/8a20d0607e3d656dfc52d3f1a94b59e9535a55ed/todo-app).
