@@ -329,3 +329,14 @@ See [todo-app](https://github.com/joonaspartanen/devops-with-kubernetes/tree/8a2
 ### 2.09
 
 See [commit](https://github.com/joonaspartanen/devops-with-kubernetes/commit/a00c7a6d10b17c6f9e3aad810aa56523739fdf5d).
+
+### 2.10
+
+Log output from Loki:
+
+```
+2020-12-12T16:15:45.42924719Z stdout F Received new todo with content:
+2020-12-12T16:15:45.429313959Z stdout F This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long.
+2020-12-12T16:15:45.429331033Z stdout F IP: ::ffff:10.42.0.43
+2020-12-12T16:15:45.429365809Z stdout F Todo refused. Content length 391 exceeds limit of 140 characters.
+```

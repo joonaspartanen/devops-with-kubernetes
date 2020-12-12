@@ -19,7 +19,7 @@ spec:
               claimName: images-claim
       containers:
         - name: todo-app-client
-          image: partanenjoonas/todo-app-client:2.08
+          image: partanenjoonas/todo-app-client:2.10.3
           volumeMounts:
             - mountPath: /usr/src/app/images
               name: images-volume

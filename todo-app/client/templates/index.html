@@ -9,7 +9,7 @@
     <h1>Yet Another Todo App</h1>
     <img src="todoapp/img/pic.jpg" width="400px" height="400px" />
     <form id="todo-form">
-      <input type="text" name="todo" id="todo-input" />
+      <input type="text" name="todo" id="todo-input" required />
       <input type="submit" value="Add todo" />
     </form>
     <ul id="todo-list"></ul>
@@ -44,6 +44,11 @@
   function handleFormSubmit(event) {
     event.preventDefault()
     const todoInput = document.getElementById('todo-input')
+
+    if (todoInput.value.length > 140) {
+      alert('Todo length exceeds the limit of 140 characters.')
+      return
+    }
 
     const content = { content: todoInput.value }
 

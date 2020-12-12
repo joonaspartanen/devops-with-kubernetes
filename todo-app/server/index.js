@@ -17,7 +17,6 @@ const client = new Client({
 })
 
 client.connect()
-console.log(client)
 
 client.query('CREATE TABLE IF NOT EXISTS Todo(id SERIAL PRIMARY KEY, content VARCHAR(255), done BOOLEAN);')
 
@@ -25,8 +24,6 @@ let lastPhotoUpdate = new Date()
 
 const getTodos = async () => {
   const res = await client.query('SELECT * FROM Todo')
-  console.log(res)
-
   const todos = res?.rows?.map(row => ({content: row.content, done: row.done}))
   return todos
 }
@@ -68,10 +65,18 @@ app.get('/todoapp/api/todos', async (req, res) => {
 })
 
 app.post('/todoapp/api/todos', async (req, res) => {
-  console.log(req)
-  const todo = { content: req.body.content, done: false }
+  const content = req.body.content
+
+  console.log(`Received new todo with content:\n${content}\nIP: ${req.ip}`)
+
+  if (content.length > 140) {
+    console.log(`Todo refused. Content length ${content.length} exceeds limit of 140 characters.`)
+    return res.status(400).send('Too long todo content.')
+  }
+
+  const todo = { content: content, done: false }
   addTodo(todo)
-  res.json(todo)
+  return res.json(todo)
 })
 
 app.listen(PORT, () => {
