@@ -1,5 +1,4 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const axios = require('axios')
 const fs = require('fs')
 const app = express()
@@ -55,7 +54,7 @@ const fetchPhotoFromApi = async () => {
 }
 
 app.use('/todoapp/img', express.static(path.join(__dirname, 'images')))
-app.use(bodyParser.json())
+app.use(express.json())
 
 fetchPhotoFromApi()
 
@@ -69,7 +68,7 @@ app.get('/todoapp/api/todos', async (req, res) => {
 })
 
 app.post('/todoapp/api/todos', async (req, res) => {
-  console.log(req.body)
+  console.log(req)
   const todo = { content: req.body.content, done: false }
   addTodo(todo)
   res.json(todo)
