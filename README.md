@@ -325,3 +325,7 @@ $ curl http://localhost:8001/
 ### 2.08
 
 See [todo-app](https://github.com/joonaspartanen/devops-with-kubernetes/tree/8a20d0607e3d656dfc52d3f1a94b59e9535a55ed/todo-app).
+
+### 2.09
+
+See [commit](https://github.com/joonaspartanen/devops-with-kubernetes/commit/a00c7a6d10b17c6f9e3aad810aa56523739fdf5d).
