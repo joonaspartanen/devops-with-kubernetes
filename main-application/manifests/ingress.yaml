@@ -5,17 +5,13 @@ metadata:
   namespace: main-namespace
 spec:
   rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: main-apps-svc
-          servicePort: 2345
-      - path: /todoapp
-        backend:
-          serviceName: todo-app-client-svc
-          servicePort: 2347
-      - path: /todoapp/api
-        backend:
-          serviceName: todo-app-svc
-          servicePort: 2348
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: main-apps-svc
+              servicePort: 80
+          - path: /pingpong
+            backend:
+              serviceName: pingpong-app-svc
+              servicePort: 80

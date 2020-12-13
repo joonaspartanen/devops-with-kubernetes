@@ -356,3 +356,15 @@ postgres-svc       ClusterIP      None           <none>           5432/TCP      
 $ curl 35.228.26.63
 {"counter":1}
 ```
+
+### 3.02
+
+```zsh
+$ kubectl get ingress -n main-namespace
+NAME               HOSTS   ADDRESS         PORTS   AGE
+main-app-ingress   *       35.244.135.31   80      23m
+$ curl 35.244.135.31
+<p>hello</p><p>7:49:11 PM: 11d37d0c-b8f9-4ca3-a08c-f221ef67a145</p><p>Ping / pongs: 241</p>
+$ curl 35.244.135.31/pingpong
+{"counter":242}
+```

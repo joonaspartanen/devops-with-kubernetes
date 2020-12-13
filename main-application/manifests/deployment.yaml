@@ -24,7 +24,7 @@ spec:
             - mountPath: /usr/src/app/files
               name: hash-volume
         - name: main-app-reader
-          image: partanenjoonas/main-app-reader:2.06
+          image: partanenjoonas/main-app-reader:3.02
           env:
             - name: MESSAGE
               valueFrom:

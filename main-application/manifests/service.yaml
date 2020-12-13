@@ -4,10 +4,10 @@ metadata:
   name: main-apps-svc
   namespace: main-namespace
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: main-apps
   ports:
-    - port: 2345
+    - port: 80
       protocol: TCP
       targetPort: 8000

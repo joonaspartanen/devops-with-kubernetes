@@ -40,6 +40,11 @@ const readPingPongs = () => {
 }
 
 const getPingPongs = async () => {
-  const response = await axios.get('http://pingpong-app-svc')
-  return response.data
+  try {
+    const response = await axios.get('http://pingpong-app-svc/pingpong')
+    return response.data
+  }
+  catch (err) {
+    console.error('Unable to get /pingpong')
+  }
 }

@@ -19,7 +19,7 @@ spec:
               claimName: pingpong-claim
       containers:
         - name: pingpong-app
-          image: partanenjoonas/pingpong-app:2.07.11
+          image: partanenjoonas/pingpong-app:3.02
           volumeMounts:
             - mountPath: /usr/src/app/files
               name: pingpong-volume

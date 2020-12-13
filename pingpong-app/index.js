@@ -51,7 +51,7 @@ const saveToFile = () => {
 
 console.log(process.env.POSTGRES_DB)
 
-app.get('/', (req, res) => {
+app.get('/pingpong', (req, res) => {
   counter++
   const query = {
     text: 'UPDATE Pingpong SET counter = $1 WHERE id = 1',
