@@ -14,15 +14,15 @@ spec:
         app: pingpong-app
     spec:
       volumes:
-        - name: hash-volume
+        - name: pingpong-volume
           persistentVolumeClaim:
-              claimName: hash-claim
+              claimName: pingpong-claim
       containers:
         - name: pingpong-app
           image: partanenjoonas/pingpong-app:2.07.11
           volumeMounts:
             - mountPath: /usr/src/app/files
-              name: hash-volume
+              name: pingpong-volume
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:

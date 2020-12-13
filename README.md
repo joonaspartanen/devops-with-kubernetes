@@ -275,6 +275,8 @@ $ curl http://localhost:8001/todoapp
 </script>
 ```
 
+## Part 2
+
 ### 2.01
 
 ```zsh
@@ -339,4 +341,18 @@ Log output from Loki:
 2020-12-12T16:15:45.429313959Z stdout F This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long. This todo is too long.
 2020-12-12T16:15:45.429331033Z stdout F IP: ::ffff:10.42.0.43
 2020-12-12T16:15:45.429365809Z stdout F Todo refused. Content length 391 exceeds limit of 140 characters.
+```
+
+## Part 3
+
+### 3.01
+
+```zsh
+$ kubectl get svc -n main-namespace
+NAME               TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)          AGE
+main-apps-svc      LoadBalancer   10.3.243.196   35.228.125.212   2345:30828/TCP   42m
+pingpong-app-svc   LoadBalancer   10.3.252.54    35.228.26.63     80:30841/TCP     33m
+postgres-svc       ClusterIP      None           <none>           5432/TCP         10m
+$ curl 35.228.26.63
+{"counter":1}
 ```

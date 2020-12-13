@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: main-app-ingress
-  namespace: todo-namespace
+  namespace: main-namespace
 spec:
   rules:
   - http:

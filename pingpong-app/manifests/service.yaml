@@ -4,11 +4,10 @@ metadata:
   name: pingpong-app-svc
   namespace: main-namespace
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: pingpong-app
   ports:
-    - name: http
+    - port: 80
       protocol: TCP
-      port: 80
       targetPort: 8080
