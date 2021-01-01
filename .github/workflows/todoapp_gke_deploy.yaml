@@ -13,6 +13,9 @@ jobs:
   build-publish-deploy-server:
     name: Build, publish, and deploy the server app
     runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: todo-app/server
 
     steps:
       - name: Checkout
@@ -44,6 +47,9 @@ jobs:
   build-publish-deploy-client:
     name: Build, publish, and deploy the client app
     runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: todo-app/client
 
     steps:
       - name: Checkout
