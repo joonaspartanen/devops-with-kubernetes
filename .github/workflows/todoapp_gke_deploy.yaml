@@ -38,6 +38,7 @@ jobs:
           chmod u+x ./kustomize
       - name: Deploy
         run: |-
+          cd ..
           ./kustomize edit set image TODOAPP/SERVER=$SERVER_IMAGE_WITH_TAG
           kubectl create namespace todo-namespace
           kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.1/controller.yaml
@@ -72,6 +73,9 @@ jobs:
           chmod u+x ./kustomize
       - name: Deploy
         run: |-
+          cd ..
           ./kustomize edit set image TODOAPP/CLIENT=$CLIENT_IMAGE_WITH_TAG
+          kubectl create namespace todo-namespace
+          kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.1/controller.yaml
           kubectl apply -k .
           kubectl rollout status deployment $CLIENT_IMAGE
