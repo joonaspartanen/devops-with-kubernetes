@@ -34,11 +34,11 @@ jobs:
         run: docker push "$SERVER_IMAGE_WITH_TAG"
       - name: Set up Kustomize
         run: |-
+          cd ..
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
       - name: Deploy
         run: |-
-          cd ..
           ./kustomize edit set image TODOAPP/SERVER=$SERVER_IMAGE_WITH_TAG
           kubectl create namespace todo-namespace
           kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.1/controller.yaml
@@ -69,11 +69,11 @@ jobs:
         run: docker push "$CLIENT_IMAGE_WITH_TAG"
       - name: Set up Kustomize
         run: |-
+          cd ..
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
       - name: Deploy
         run: |-
-          cd ..
           ./kustomize edit set image TODOAPP/CLIENT=$CLIENT_IMAGE_WITH_TAG
           kubectl create namespace todo-namespace
           kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.1/controller.yaml
