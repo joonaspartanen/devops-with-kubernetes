@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-app-client-dep
+  name: todo-app-client
   namespace: todo-namespace
 spec:
   replicas: 1
