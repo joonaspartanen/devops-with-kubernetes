@@ -6,8 +6,8 @@ on:
 env:
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
-  SERVER_IMAGE: todo-app-dep
-  CLIENT_IMAGE: todo-app-client-dep
+  SERVER_IMAGE: todo-app
+  CLIENT_IMAGE: todo-app-client
 
 jobs:
   build-publish-deploy-server:
@@ -34,12 +34,10 @@ jobs:
         run: docker push "$SERVER_IMAGE_WITH_TAG"
       - name: Set up Kustomize
         run: |-
-          cd ..
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
       - name: Deploy
         run: |-
-          cd ..
           ./kustomize edit set image TODOAPP/SERVER=$SERVER_IMAGE_WITH_TAG
           kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.1/controller.yaml
           kubectl apply -k .
@@ -69,12 +67,10 @@ jobs:
         run: docker push "$CLIENT_IMAGE_WITH_TAG"
       - name: Set up Kustomize
         run: |-
-          cd ..
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
       - name: Deploy
         run: |-
-          cd ..
           ./kustomize edit set image TODOAPP/CLIENT=$CLIENT_IMAGE_WITH_TAG
           kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.1/controller.yaml
           kubectl apply -k .
