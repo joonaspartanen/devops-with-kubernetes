@@ -13,13 +13,6 @@ spec:
       labels:
         app: todo-app-client
     spec:
-      volumes:
-        - name: images-volume
-          persistentVolumeClaim:
-              claimName: images-claim
       containers:
         - name: todo-app-client
-          image: partanenjoonas/todo-app-client:2.10.3
-          volumeMounts:
-            - mountPath: /usr/src/app/images
-              name: images-volume
+          image: TODOAPP/CLIENT

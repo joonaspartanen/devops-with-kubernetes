@@ -4,11 +4,9 @@ const app = express()
 const PORT = process.env.PORT || 8040
 const path = require('path')
 
-app.use('/todoapp/img', express.static(path.join(__dirname, 'images')))
-
-app.get('/todoapp', (req, res) => {
+app.get('/', (req, res) => {
   console.log('sending index.html')
-  res.sendFile(path.join(__dirname + '/templates/index.html'))
+  res.status(200).sendFile(path.join(__dirname + '/templates/index.html'))
 })
 
 app.listen(PORT, () => {

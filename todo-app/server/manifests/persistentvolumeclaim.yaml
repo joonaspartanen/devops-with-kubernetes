@@ -4,7 +4,6 @@ metadata:
   name: images-claim
   namespace: todo-namespace
 spec:
-  storageClassName: ""
   accessModes:
     - ReadWriteOnce
   resources:

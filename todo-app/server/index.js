@@ -50,12 +50,19 @@ const fetchPhotoFromApi = async () => {
   lastPhotoUpdate = new Date()
 }
 
-app.use('/todoapp/img', express.static(path.join(__dirname, 'images')))
+app.use('/api/img', express.static(path.join(__dirname, 'images')))
 app.use(express.json())
 
 fetchPhotoFromApi()
 
-app.get('/todoapp/api/todos', async (req, res) => {
+app.get('/', (req, res) => {
+  console.log('get /')
+
+  res.sendStatus(200)
+})
+
+app.get('/api/todos', async (req, res) => {
+  console.log('get /api/posts')
   if (lastPhotoUpdate.getDate() !== new Date().getDate()) {
     fetchPhotoFromApi()
   }
@@ -64,7 +71,8 @@ app.get('/todoapp/api/todos', async (req, res) => {
   res.json(todos)
 })
 
-app.post('/todoapp/api/todos', async (req, res) => {
+app.post('/api/todos', async (req, res) => {
+  console.log('post /api/posts')
   const content = req.body.content
 
   console.log(`Received new todo with content:\n${content}\nIP: ${req.ip}`)

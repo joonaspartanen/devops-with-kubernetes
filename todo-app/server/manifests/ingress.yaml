@@ -4,14 +4,17 @@ metadata:
   name: todo-app-ingress
   namespace: todo-namespace
 spec:
+  backend:
+    serviceName: todo-app-client-svc
+    servicePort: 80
   rules:
   - http:
       paths:
-      - path: /todoapp
+      - path: /*
         backend:
           serviceName: todo-app-client-svc
-          servicePort: 2347
-      - path: /todoapp/api
+          servicePort: 80
+      - path: /api/*
         backend:
           serviceName: todo-app-svc
-          servicePort: 2348
+          servicePort: 80
