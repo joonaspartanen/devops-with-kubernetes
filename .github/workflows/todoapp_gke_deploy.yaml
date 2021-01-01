@@ -6,8 +6,8 @@ on:
 env:
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
-  SERVER_IMAGE: todo-app
-  CLIENT_IMAGE: todo-app-client
+  SERVER_IMAGE: todo-app-dep
+  CLIENT_IMAGE: todo-app-client-dep
 
 jobs:
   build-publish-deploy-server:
