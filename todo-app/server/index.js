@@ -75,7 +75,7 @@ app.post('/api/todos', async (req, res) => {
   console.log('post /api/posts')
   const content = req.body.content
 
-  console.log(`Received new todo with content:\n${content}\nIP: ${req.ip}`)
+  console.log(`Received new todo with content:\n${content}\nIP: ${req.ip}.`)
 
   if (content.length > 140) {
     console.log(`Todo refused. Content length ${content.length} exceeds limit of 140 characters.`)
