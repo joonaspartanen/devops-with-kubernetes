@@ -368,3 +368,9 @@ $ curl 35.244.135.31
 $ curl 35.244.135.31/pingpong
 {"counter":242}
 ```
+
+### 3.03
+
+[Workflow](https://github.com/joonaspartanen/devops-with-kubernetes/blob/503cfa660fd23f70d63ef5901b6f2ded503d15a7/.github/workflows/todoapp_gke_deploy.yaml)
+[Action results](https://github.com/joonaspartanen/devops-with-kubernetes/runs/1639010983?check_suite_focus=true)
+
