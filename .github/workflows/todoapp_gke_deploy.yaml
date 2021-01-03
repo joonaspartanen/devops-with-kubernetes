@@ -44,10 +44,16 @@ jobs:
         run: |-
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
-      - name: Deploy
+      - name: Deploy server
         run: |-
+          cd server
           ./kustomize edit set image TODOAPP/SERVER=$SERVER_IMAGE_WITH_TAG
-          ./kustomize edit set image TODOAPP/CLIENT=$CLIENT_IMAGE_WITH_TAG
           kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.1/controller.yaml
           kubectl apply -k .
           kubectl rollout status deployment $SERVER_IMAGE -n todo-namespace
+      - name: Deploy client
+        run: |-
+          cd client
+          ./kustomize edit set image TODOAPP/CLIENT=$CLIENT_IMAGE_WITH_TAG
+          kubectl apply -k .
+          kubectl rollout status deployment $CLIENT_IMAGE -n todo-namespace
