@@ -56,7 +56,7 @@ app.use(express.json())
 fetchPhotoFromApi()
 
 app.get('/', (req, res) => {
-  console.log('get /')
+  console.log('get / (DEV)')
 
   res.sendStatus(200)
 })
