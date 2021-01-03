@@ -1,0 +1,41 @@
+name: Delete environment on branch delete
+
+on: delete
+
+env:
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: europe-north1-b
+  SERVER_IMAGE: todo-app
+  CLIENT_IMAGE: todo-app-client
+
+jobs:
+  delete-environment:
+    name: Delete environment on branch delete
+    runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: todo-app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
+          project_id: ${{ secrets.GKE_PROJECT }}
+      - run: gcloud --quiet auth configure-docker
+      - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+      - name: Set up Kustomize
+        run: |-
+          curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+          chmod u+x ./kustomize
+      - name: Delete client resources
+        run: |-
+          cd client
+          kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
+          kubectl delete -k .
+      - name: Delete server resources
+        run: |-
+          cd server
+          kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
+          kubectl delete -k .
