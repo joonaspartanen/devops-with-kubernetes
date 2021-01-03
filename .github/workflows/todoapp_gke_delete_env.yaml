@@ -26,4 +26,6 @@ jobs:
       - run: gcloud --quiet auth configure-docker
       - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
       - name: Delete resources
-        run: kubectl delete namespace ${GITHUB_REF#refs/heads/} || true
+        run: |-
+          echo ${{ github.event.ref }}
+          kubectl delete namespace ${{ github.event.ref }} || true
