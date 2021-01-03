@@ -372,5 +372,9 @@ $ curl 35.244.135.31/pingpong
 ### 3.03
 
 [Workflow](https://github.com/joonaspartanen/devops-with-kubernetes/blob/503cfa660fd23f70d63ef5901b6f2ded503d15a7/.github/workflows/todoapp_gke_deploy.yaml)
-[Action results](https://github.com/joonaspartanen/devops-with-kubernetes/runs/1639010983?check_suite_focus=true)
+[Action run results](https://github.com/joonaspartanen/devops-with-kubernetes/runs/1639010983?check_suite_focus=true)
 
+### 3.04
+
+[Workflow](https://github.com/joonaspartanen/devops-with-kubernetes/blob/7437f4212a9b0c973e3e19ffff93a13661bde22a/.github/workflows/todoapp_gke_deploy.yaml)
+[Action run results](https://github.com/joonaspartanen/devops-with-kubernetes/runs/1639766747?check_suite_focus=true)
