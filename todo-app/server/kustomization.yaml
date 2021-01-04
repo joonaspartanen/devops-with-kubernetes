@@ -9,6 +9,7 @@ resources:
   - manifests/ingress.yaml
   - manifests/deployment.yaml
   - manifests/service.yaml
+  - manifests/horizontalpodautoscaler.yaml
 
 images:
   - name: TODOAPP/SERVER

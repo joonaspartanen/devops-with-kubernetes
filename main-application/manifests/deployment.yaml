@@ -31,7 +31,7 @@ spec:
           image: partanenjoonas/main-app-reader:3.02
           resources:
             limits:
-              cpu: "150m"
+              cpu: "100m"
               memory: "100Mi"
           env:
             - name: MESSAGE

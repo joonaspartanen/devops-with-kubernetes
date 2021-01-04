@@ -2,6 +2,7 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: pingpong-app-hpa
+  namespace: main-namespace
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
@@ -9,4 +10,4 @@ spec:
     name: pingpong-app-dep
   minReplicas: 1
   maxReplicas: 2
-  targetCPUUtilizationPercentage: 50
+  targetCPUUtilizationPercentage: 30
