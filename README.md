@@ -400,3 +400,13 @@ $ curl 35.244.135.31/pingpong
 
 I chose to use my own Postgres image with PersistentVolumeClaims, because I already used quite a lot of time for the setup during the previous exercises. I had some trouble with using sealed secrets to safely store the database password. In the end the solution was simple, but debugging took some time. In my case, using the Google Cloud SQL might have been actually easier.
 
+### 3.08
+See [horizontalpodautoscaler.yaml](https://github.com/joonaspartanen/devops-with-kubernetes/blob/master/todo-app/server/manifests/horizontalpodautoscaler.yaml).
+
+### 3.09
+
+Main application: [horizontalpodautoscaler.yaml](https://github.com/joonaspartanen/devops-with-kubernetes/blob/master/main-application/manifests/horizontalpodautoscaler.yaml).
+Pingpong app: [horizontalpodautoscaler.yaml](https://github.com/joonaspartanen/devops-with-kubernetes/blob/master/pingpong-app/manifests/horizontalpodautoscaler.yaml).
+
+### 3.10
+![Log screenshot](https://raw.githubusercontent.com/joonaspartanen/devops-with-kubernetes/master/images/exer_3_10.png)
