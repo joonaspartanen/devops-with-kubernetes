@@ -20,6 +20,10 @@ spec:
       containers:
         - name: pingpong-app
           image: partanenjoonas/pingpong-app:3.02
+          resources:
+            limits:
+              cpu: "300m"
+              memory: "100Mi"
           volumeMounts:
             - mountPath: /usr/src/app/files
               name: pingpong-volume

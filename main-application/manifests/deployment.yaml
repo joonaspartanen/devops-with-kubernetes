@@ -20,11 +20,19 @@ spec:
       containers:
         - name: main-app-writer
           image: partanenjoonas/main-app-writer:1.10.3
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           volumeMounts:
             - mountPath: /usr/src/app/files
               name: hash-volume
         - name: main-app-reader
           image: partanenjoonas/main-app-reader:3.02
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           env:
             - name: MESSAGE
               valueFrom:
