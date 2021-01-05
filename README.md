@@ -386,21 +386,22 @@ $ curl 35.244.135.31/pingpong
 
 ### 3.06
 
-|                           | Google Cloud SQL | PersistentVolumeClaims with own Postgres image |
-| ------------------------- | ---------------- | ---------------------------------------------- |
-| **Initialization**        |        According to the documentation, setting up a new Google Cloud SQL database is a matter of "just a few minutes", and this seems plausible. Because it's a cloud service, the initialization costs are probably low, but there are monthly fees that depend on the usage.              |                    Using own Postgres image will probably require more work to get started, as the image needs to be set up. This means that there might also be higher initial costs, but, on the other hand, persistent volumes are probably cheaper than Google Cloud SQL in the long run.                               |
-| **Maintaining**           |         A DBaaS might be more expensive a solution, but the price comes with several benefits. First, the Google Cloud SQL is fully managed, and Google promises greater than 99.95% availability. This means that Google takes care of updating and patching the database and makes sure it keeps running.           | Using an own Postgres images means that you most likely will have to do some additional maintaining during the database lifetime. This extra work and costs must be taken into account.
-| **Backups**               | Backups and data replication are automated on Google Cloud SQL. This is definitely a big advantage over the other solution.                   | With an own Postgres image, you must take care of the backups yourself. The process is most likely automated, but it is important to make sure that the backups are actually created as expected.                                                 |
-| **Migrating existing db** |      The documentation states that migrating an existing (production) database to Cloud SQl should be easy and require minimal downtime, with the help of Google Database Migration Service (DMS).              |                                                |  On the other hand, if you already have a database implemented with an own Postgres image, the migration should be even easier with this solution.
-|      **Safety**           |       In case of a DBaaS, many security issues are basically outsourced to the cloud provider. I believe it reasonable to assume that big cloud providers, like Google, have incentives to try to guarantee that their database services are as secure as possible. Probably the DBaaS has even reasonable default settings (security-wise), but it is of course important to make sure that the database configuration does not contain clear vulnerabilities.            | In this case, you must configure the database yourself and make sure it is safe. This option clearly leaves more room for security vulnerabilities.
-                                                |
-|      **Legal issues**           |       The DBaaS is hosted on Google servers. For example, in case of governmental organizations, there might be legal reasons that simply don't allow storing data outside the organization, which means that using Google Cloud SQL is not an option. There might also be business reasons for similar decisions. Also, the laws might require that some data must not be stored outside certain country or region, where Google might not offer server availability. | The same reasoning applies if the actual data is stored on persintent volumes located on Google servers.
+|                           | Google Cloud SQL                                                                                                                                                                                                                                                                                                                                                                                                                                                 | PersistentVolumeClaims with own Postgres image                                                                                                                                                                                                                             |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Initialization**        | According to the documentation, setting up a new Google Cloud SQL database is a matter of "just a few minutes", and this seems plausible. Because it's a cloud service, the initialization costs are probably low, but there are monthly fees that depend on the usage.                                                                                                                                                                                          | Using own Postgres image will probably require more work to get started, as the image needs to be set up. This means that there might also be higher initial costs, but, on the other hand, persistent volumes are probably cheaper than Google Cloud SQL in the long run. |
+| **Maintaining**           | A DBaaS might be more expensive a solution, but the price comes with several benefits. First, the Google Cloud SQL is fully managed, and Google promises greater than 99.95% availability. This means that Google takes care of updating and patching the database and makes sure it keeps running.                                                                                                                                                              | Using an own Postgres images means that you most likely will have to do some additional maintaining during the database lifetime. This extra work and costs must be taken into account.                                                                                    |
+| **Backups**               | Backups and data replication are automated on Google Cloud SQL. This is definitely a big advantage over the other solution.                                                                                                                                                                                                                                                                                                                                      | With an own Postgres image, you must take care of the backups yourself. The process is most likely automated, but it is important to make sure that the backups are actually created as expected.                                                                          |
+| **Migrating existing db** | The documentation states that migrating an existing (production) database to Cloud SQl should be easy and require minimal downtime, with the help of Google Database Migration Service (DMS).                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                            | On the other hand, if you already have a database implemented with an own Postgres image, the migration should be even easier with this solution. |
+| **Safety**                | In case of a DBaaS, many security issues are basically outsourced to the cloud provider. I believe it reasonable to assume that big cloud providers, like Google, have incentives to try to guarantee that their database services are as secure as possible. Probably the DBaaS has even reasonable default settings (security-wise), but it is of course important to make sure that the database configuration does not contain clear vulnerabilities.        | In this case, you must configure the database yourself and make sure it is safe. This option clearly leaves more room for security vulnerabilities.                                                                                                                        |
+|  |
+| **Legal issues**          | The DBaaS is hosted on Google servers. For example, in case of governmental organizations, there might be legal reasons that simply don't allow storing data outside the organization, which means that using Google Cloud SQL is not an option. There might also be business reasons for similar decisions. Also, the laws might require that some data must not be stored outside certain country or region, where Google might not offer server availability. | The same reasoning applies if the actual data is stored on persintent volumes located on Google servers.                                                                                                                                                                   |
 
 ### 3.07
 
 I chose to use my own Postgres image with PersistentVolumeClaims, because I already used quite a lot of time for the setup during the previous exercises. I had some trouble with using sealed secrets to safely store the database password. In the end the solution was simple, but debugging took some time. In my case, using the Google Cloud SQL might have been actually easier.
 
 ### 3.08
+
 See [horizontalpodautoscaler.yaml](https://github.com/joonaspartanen/devops-with-kubernetes/blob/master/todo-app/server/manifests/horizontalpodautoscaler.yaml).
 
 ### 3.09
@@ -409,4 +410,28 @@ Main application: [horizontalpodautoscaler.yaml](https://github.com/joonaspartan
 Pingpong app: [horizontalpodautoscaler.yaml](https://github.com/joonaspartanen/devops-with-kubernetes/blob/master/pingpong-app/manifests/horizontalpodautoscaler.yaml).
 
 ### 3.10
+
 ![Log screenshot](https://raw.githubusercontent.com/joonaspartanen/devops-with-kubernetes/master/images/exer_3_10.png)
+
+## Part 4
+
+### 4.01
+
+```zsh
+$ kubectl apply -f manifests/deployment.yaml
+deployment.apps/pingpong-app-dep created
+
+$ kubectl get po -n main-namespace
+NAME                              READY   STATUS    RESTARTS   AGE
+main-apps-dep-998786ddf-294p4     2/2     Running   5          24h
+pingpong-app-dep-cdb765cd-l2c54   0/1     Running   0          23s
+
+$ kubectl apply -f manifests/statefulset.yaml
+statefulset.apps/postgres-ss created
+
+$ kubectl get po -n main-namespace
+NAME                              READY   STATUS    RESTARTS   AGE
+postgres-ss-0                     1/1     Running   0          2m37s
+main-apps-dep-998786ddf-294p4     2/2     Running   6          24h
+pingpong-app-dep-cdb765cd-hnqrd   1/1     Running   0          38s
+```

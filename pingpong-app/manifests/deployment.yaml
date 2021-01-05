@@ -19,7 +19,7 @@ spec:
               claimName: pingpong-claim
       containers:
         - name: pingpong-app
-          image: partanenjoonas/pingpong-app:3.02
+          image: partanenjoonas/pingpong-app:4.01.22
           resources:
             limits:
               cpu: "150m"
@@ -36,4 +36,9 @@ spec:
           envFrom:
           - configMapRef:
               name: postgres-configuration
-
+          readinessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            httpGet:
+               path: /pingpong/healthz
+               port: 8080
