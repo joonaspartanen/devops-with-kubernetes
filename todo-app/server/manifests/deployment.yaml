@@ -36,3 +36,15 @@ spec:
           envFrom:
           - configMapRef:
               name: tododb-configuration
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /api/healthz
+               port: 8050
+          livenessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            httpGet:
+               path: /api/healthz
+               port: 8050

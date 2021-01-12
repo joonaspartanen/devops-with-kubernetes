@@ -16,19 +16,46 @@ const client = new Client({
   port: process.env.POSTGRES_PORT,
 })
 
-client.connect()
+const connectToDb = () => {
+  client
+    .connect()
+    .then(() => console.log('Connected to db'))
+    .catch(err => {
+      console.error('Error connecting to db: ', err)
+    })
+}
 
-client.query('CREATE TABLE IF NOT EXISTS Todo(id SERIAL PRIMARY KEY, content VARCHAR(255), done BOOLEAN);')
+const initializeTable = () => {
+  client.query('CREATE TABLE IF NOT EXISTS Todo(id SERIAL PRIMARY KEY, content VARCHAR(255), done BOOLEAN);',)
+    .then(console.log('Table pingpong created'))
+    .catch(err => {
+      console.error('Creating table failed: ', err)
+    })
+}
+
+connectToDb()
+initializeTable()
+
+const dbConnectionOk = async () => {
+  try {
+    await client.query('SELECT NOW()')
+    console.log('Health check ok')
+    return true
+  } catch (err) {
+    console.error('Health check failed: ', err)
+    return false
+  }
+}
 
 let lastPhotoUpdate = new Date()
 
 const getTodos = async () => {
   const res = await client.query('SELECT * FROM Todo')
-  const todos = res?.rows?.map(row => ({content: row.content, done: row.done}))
+  const todos = res?.rows?.map(row => ({ content: row.content, done: row.done }))
   return todos
 }
 
-const addTodo = async (todo) => {
+const addTodo = async todo => {
   const query = 'INSERT INTO Todo (content, done) VALUES ($1, $2)'
   const values = [todo.content, false]
   client.query(query, values, (err, res) => {
@@ -85,6 +112,12 @@ app.post('/api/todos', async (req, res) => {
   const todo = { content: content, done: false }
   addTodo(todo)
   return res.json(todo)
+})
+
+app.get('/api/healthz', async (req, res) => {
+  const ok = await dbConnectionOk()
+  if (ok) return res.sendStatus(200)
+  else return res.sendStatus(500)
 })
 
 app.listen(PORT, () => {

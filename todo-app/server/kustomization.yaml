@@ -13,4 +13,4 @@ resources:
 
 images:
   - name: TODOAPP/SERVER
-    newName: partanenjoonas/todo-app:3.03.6
+    newName: partanenjoonas/todo-app:4.02.2
