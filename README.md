@@ -417,21 +417,5 @@ Pingpong app: [horizontalpodautoscaler.yaml](https://github.com/joonaspartanen/d
 
 ### 4.01
 
-```zsh
-$ kubectl apply -f manifests/deployment.yaml
-deployment.apps/pingpong-app-dep created
-
-$ kubectl get po -n main-namespace
-NAME                              READY   STATUS    RESTARTS   AGE
-main-apps-dep-998786ddf-294p4     2/2     Running   5          24h
-pingpong-app-dep-cdb765cd-l2c54   0/1     Running   0          23s
-
-$ kubectl apply -f manifests/statefulset.yaml
-statefulset.apps/postgres-ss created
-
-$ kubectl get po -n main-namespace
-NAME                              READY   STATUS    RESTARTS   AGE
-postgres-ss-0                     1/1     Running   0          2m37s
-main-apps-dep-998786ddf-294p4     2/2     Running   6          24h
-pingpong-app-dep-cdb765cd-hnqrd   1/1     Running   0          38s
-```
+Ping pong app: [deployment.yaml](https://github.com/joonaspartanen/devops-with-kubernetes/blob/master/pingpong-app/manifests/deployment.yaml)
+Main app: [deployment.yaml](https://github.com/joonaspartanen/devops-with-kubernetes/blob/master/main-application/manifests/deployment.yaml)
