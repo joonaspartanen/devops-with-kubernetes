@@ -28,7 +28,7 @@ spec:
             - mountPath: /usr/src/app/files
               name: hash-volume
         - name: main-app-reader
-          image: partanenjoonas/main-app-reader:3.02
+          image: partanenjoonas/main-app-reader:4.01.3
           resources:
             limits:
               cpu: "100m"
@@ -42,3 +42,9 @@ spec:
           volumeMounts:
             - mountPath: /usr/src/app/files
               name: hash-volume
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /healthz
+               port: 8000

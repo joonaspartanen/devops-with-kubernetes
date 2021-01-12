@@ -19,8 +19,8 @@ const client = new Client({
 
 const dbConnectionOk = async () => {
   try {
-    const res = await client.query('SELECT NOW()')
-    console.log('Health check ok: ', res)
+    await client.query('SELECT NOW()')
+    console.log('Health check ok')
     return true
   } catch (err) {
     console.error('Health check failed: ', err)
@@ -40,7 +40,7 @@ const connectToDb = () => {
 const initializeTable = () => {
   client
     .query('CREATE TABLE IF NOT EXISTS Pingpong(id INTEGER PRIMARY KEY, counter INTEGER);')
-    .then('Table pingpong created')
+    .then(console.log('Table pingpong created'))
     .catch(err => {
       console.error('Creating table failed: ', err)
     })
@@ -102,10 +102,7 @@ app.get('/pingpong', (req, res) => {
 app.get('/pingpong/healthz', async (req, res) => {
   const ok = await dbConnectionOk()
   if (ok) return res.sendStatus(200)
-  else {
-    initializeDb()
-    return res.sendStatus(500)
-  }
+  else return res.sendStatus(500)
 })
 
 app.listen(PORT, () => {

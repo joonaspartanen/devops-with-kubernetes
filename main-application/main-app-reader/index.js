@@ -16,6 +16,16 @@ app.get('/', async (req, res) => {
   res.send(`<p>${process.env.MESSAGE}</p><p>${hash}</p><p>Ping / pongs: ${pingPongs.counter}</p>`)
 })
 
+app.get('/healthz', async (req, res) => {
+  const pingPongs = await getPingPongs()
+
+  if (pingPongs === -1) {
+    return res.sendStatus(500)
+  }
+
+  return res.sendStatus(200)
+})
+
 app.listen(PORT, () => {
   console.log(`Server started in port ${PORT}`)
 })
@@ -43,8 +53,8 @@ const getPingPongs = async () => {
   try {
     const response = await axios.get('http://pingpong-app-svc/pingpong')
     return response.data
-  }
-  catch (err) {
+  } catch (err) {
     console.error('Unable to get /pingpong')
+    return -1
   }
 }
