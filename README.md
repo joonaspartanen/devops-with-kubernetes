@@ -423,3 +423,13 @@ Main app: [deployment.yaml](https://github.com/joonaspartanen/devops-with-kubern
 ### 4.02
 
 Todo app: [deployment.yaml](https://github.com/joonaspartanen/devops-with-kubernetes/blob/master/todo-app/server/manifests/deployment.yaml)
+
+### 4.03
+
+Query: `count(kube_pod_info{created_by_kind="StatefulSet",namespace="prometheus"}) by (created_by_kind)`
+
+Result:
+
+| Time                | created_by_kind | Value #A |
+| ------------------- | --------------- | -------- |
+| 2021-01-18 12:27:07 | StatefulSet     | 2        |
